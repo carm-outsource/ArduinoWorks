@@ -14,10 +14,11 @@
 int CODES[] = {
         0X5B, 0X4F,
         0X66, 0X6D,
-        0X7D, 0X07
+        0X7D, 0X07,
 };
 
 void display(int num) {
+    Serial.begin(9600);
     digitalWrite(LED_A, num & 0x01);
     digitalWrite(LED_B, num & 0x02);
     digitalWrite(LED_C, num & 0x04);
@@ -36,10 +37,11 @@ void setup() {
     pinMode(LED_E, OUTPUT);
     pinMode(LED_F, OUTPUT);
     pinMode(LED_G, OUTPUT);
+    // 全亮
+    display(0x7F);
 }
 
 void loop() {
-    // 按下按钮时，显示一个随机数
     if (digitalRead(BTN) == 0) {
         int num = random(0, 5);
         display(CODES[num]);
